@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [apiData, setApiData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null); // To manage selected category details
-  const [deleteResponse, setDeleteResponse] = useState(null); // To store delete API response
+  const [selectedCategory, setSelectedCategory] = useState(null); 
+  const [deleteResponse, setDeleteResponse] = useState(null);
   const [updateResponse, setUpdateResponse] = useState(null);
-  const [deleteLoading, setDeleteLoading] = useState(false); // Loading state for delete API
+  const [deleteLoading, setDeleteLoading] = useState(false); 
 
-  // Function to call the API   // Fetch categories
+  
   const callApi = async () => {
     setLoading(true);
     setError(null);
@@ -18,7 +17,7 @@ const Dashboard = () => {
     try {
       const response = await fetch(
         "https://dae4ebe4-bd07-4680-b672-e008113837ee.mock.pstmn.io/categories/list"
-      ); // Replace with your actual API URL
+      ); 
       if (response.ok) {
         const data = await response.json();
         setApiData(data);
@@ -33,7 +32,7 @@ const Dashboard = () => {
   };
 
 
-  // New API Call Function 1 for Button 1
+  
   const handleUpdateCategory = async () => {
     if (!selectedCategory) {
       alert("Please select a category to update.");
@@ -77,7 +76,6 @@ const Dashboard = () => {
     }
   };
 
-  // Delete category
   const handleDeleteCategory = async () => {
     if (!selectedCategory) {
       alert("Please select a category to delete.");
@@ -118,10 +116,10 @@ const Dashboard = () => {
     }
   };
 
-  // Automatically call API when the component mounts
+ 
   useEffect(() => {
     callApi();
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, []); 
 
 
 
@@ -131,26 +129,18 @@ const Dashboard = () => {
         <h1 className="text-5xl font-extrabold text-white drop-shadow-lg mb-8">
           Welcome to the <span className="text-yellow-300">Dashboard</span>
         </h1>
-        {/* // Link that triggers the API call
-      // <button  */}
-        {/* //   onClick={callApi} 
-      //   className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-      // >
-      //   Call API
-      // </button> */}
-        {/* New Button */}
+        
 
 
-        {/* Loading state */}
+       
         {loading && <p className="text-white">Loading...</p>}
-        {/* Display error if any */} {/* Error state */}
+       
         {error && <p className="text-red-500">{error}</p>}
 
 
-        {/* Display API data */}
         {apiData && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Left Section: Category List */}
+         
             <div className="col-span-1 bg-white p-4 rounded shadow-lg">
               <h2 className="text-lg font-bold mb-4">Categories</h2>
               <ul className="text-left space-y-2">
@@ -164,7 +154,7 @@ const Dashboard = () => {
                     }`}
                     onClick={() => setSelectedCategory(category)}
                   > 
-                    {/* Category Name */}
+                    
                     {category.name}
                     </li>
                 ))}
@@ -172,7 +162,6 @@ const Dashboard = () => {
             </div>
           
 
-            {/* Right Section: Selected Category Details */}
             <div className="col-span-2 bg-white p-4 rounded shadow-lg">
               {selectedCategory ? (
                 <div>
@@ -208,7 +197,7 @@ const Dashboard = () => {
 
 
 
-        {/* Two New Buttons in the Bottom Left Corner */}
+   
       <div className="absolute bottom-4 left-4 space-y-4">
         <button
           onClick={handleUpdateCategory}
